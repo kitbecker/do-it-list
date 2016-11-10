@@ -1,12 +1,10 @@
 $(".itemDone").click(function(){
 	var test = $(this).parent().attr('id');
 	var removeTarg = $(this).parent();
-	alert(test);
-	$(this).parent().animate({ width: "70%" }, 300 );
+	console.log(test); /* get the items id */
+	$(this).parent().animate({ width: "70%" }, 100 ).animate({ opacity: 0.0 }, 100 ).animate({ height: 0, padding: 0 }, 200 );
 	$(this).parent().queue(function() {
-	  $(this).animate({ opacity: 0.0 }, 300 );
-	  $(this).animate({ height: 0, padding: 0 }, 200 );
-	  $( removeTarg ).delay(200).remove();
+	  $( removeTarg ).remove();
 	  $( this ).dequeue();
 	});
 }); 

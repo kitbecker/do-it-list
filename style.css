@@ -1,4 +1,4 @@
-/* line 3, scss/content.scss */
+/* line 3, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .group {
   width: 33.3333%;
   float: left;
@@ -6,7 +6,7 @@
   padding: 20px 3%;
 }
 
-/* line 5, scss/content.scss */
+/* line 5, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item {
   width: 100%;
   display: inline-block;
@@ -16,17 +16,32 @@
   overflow: hidden;
 }
 
-/* line 7, scss/content.scss */
+/* line 7, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item-title {
   width: calc(100% - 40px);
   float: left;
 }
 
-/* line 9, scss/content.scss */
+/* line 9, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 button.itemDone {
   border: 1px solid black;
   width: 25px;
   height: 25px;
   float: right;
   display: inline-block;
+}
+
+/* line 1, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/general.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 7, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/general.scss */
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
