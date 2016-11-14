@@ -1,4 +1,4 @@
-/* line 3, scss/content.scss */
+/* line 2, scss/content.scss */
 .group {
   width: 33.3333%;
   float: left;
@@ -6,23 +6,57 @@
   padding: 20px 3%;
 }
 
-/* line 5, scss/content.scss */
+/* line 4, scss/content.scss */
 .item {
   width: 100%;
+  height: 45px;
   display: inline-block;
   padding: 10px 10px;
   margin: 1px 0;
   background-color: #e2e2e2;
   overflow: hidden;
+  position: relative;
 }
 
-/* line 7, scss/content.scss */
+/* line 6, scss/content.scss */
+.item.edit {
+  height: 400px;
+}
+
+/* line 8, scss/content.scss */
+.item-description {
+  background-color: #c2cfeb;
+  width: 100%;
+  margin: 40px 0 0 0;
+}
+
+/* line 10, scss/content.scss */
+.item-description textarea {
+  width: 100%;
+  height: 150px;
+}
+
+/* line 12, scss/content.scss */
 .item-title {
   width: calc(100% - 40px);
   float: left;
 }
 
-/* line 9, scss/content.scss */
+/* line 15, scss/content.scss */
+.button-area {
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+  bottom: -40px;
+  left: 10px;
+}
+
+/* line 16, scss/content.scss */
+.item.edit .button-area {
+  bottom: 10px;
+}
+
+/* line 18, scss/content.scss */
 button.itemDone {
   border: 1px solid black;
   width: 25px;
