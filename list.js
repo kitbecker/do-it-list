@@ -1,5 +1,19 @@
 
 
+
+function itemDone(itemId) {
+		var parentId = "#item-" + itemId ;	
+		
+	$(parentId).animate({ width: "70%" }, 100 ).animate({ opacity: 0.0 }, 100 ).animate({ height: 0, padding: 0 }, 200 );
+	$(parentId).queue(function() {
+	  $( parentId ).remove();
+	  $( parentId ).dequeue();
+	});
+}
+
+
+
+
 /* mark items as done once clicked */
 $(".itemDone").click(function(){
 	var test = $(this).parent().attr('id');
@@ -12,6 +26,32 @@ $(".itemDone").click(function(){
 	});
 }); 
 
+
+
+/* item functions*/
+
+/* Add Item */
+$(".addItem").click(function(){
+	window.totalItems += 1;
+    $(this).parent().parent().append("<div class='item' id='item-" + window.totalItems + "'><input type='text' placeholder='What do you want to do?' /><button class='saveItem' onclick='saveItem(" + window.totalItems + ")'>+</button></div>");
+
+});
+
+
+/* Save New Item */
+function saveItem(itemId) {
+		var parentId = "#item-" + itemId ;	
+		alert(parentId);
+		var descText  = document.body.querySelector( parentId + " input[type='text']" ).value;
+		alert(descText);
+		$(parentId  + " input[type='text']").remove();
+		$(parentId  + " .saveItem").remove();
+		$(parentId).append("<div class='item-title'>"+ descText +"</div>");
+	    $(parentId).append("<button type='button' class='itemDone' onclick='itemDone(" + itemId + ")'></button>");
+}
+
+
+/* Description Actions */
 
 /* See Item Description */
 $(".item-title").click(function(){
@@ -84,10 +124,3 @@ $("button.deleteDesc").click(function(){
 });
 
 
-
-/* Add Item Description */
-$(".addItem").click(function(){
-
-    $(this).parent().parent().append("<div class='item'><input type='text' placeholder='What do you want to do?' /><button class='saveItem'>+</button></div>");
-
-});
