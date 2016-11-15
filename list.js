@@ -1,8 +1,27 @@
 
 
+/* group functions*/
+
+/* Add group */
+$("body").on( "click", ".addGroup", function(){
+	window.totalGroups += 1;
+    $("#group-container").append("<div class='group dark' id='group-" + window.totalGroups + "'><input type='text' placeholder='Name this grouping...' /><button class='saveGroup'>+</button></div>");
+});
+
+/* Save group */
+$("body").on( "click", ".saveGroup", function(){
+	var itemId = $(this).parent().attr('id');
+	var parentId = "#" + itemId ;	
+	var descText  = document.body.querySelector( parentId + " input[type='text']" ).value;
+	$(parentId  + " input[type='text']").remove();
+	$(parentId  + " .saveGroup").remove();
+	$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
+} );
 
 
 
+
+/* item functions*/
 
 
 /* mark items as done once clicked */
@@ -17,13 +36,10 @@ $("body").on( "click", ".itemDone", function(){
 }); 
 
 
-
-/* item functions*/
-
 /* Add Item */
 $("body").on( "click", ".addItem", function(){
 	window.totalItems += 1;
-    $(this).parent().parent().append("<div class='item' id='item-" + window.totalItems + "'><input type='text' placeholder='What do you want to do?' /><button class='saveItem' onclick='saveItem(" + window.totalItems + ")'>+</button></div>");
+    $(this).parent().parent().append("<div class='item light' id='item-" + window.totalItems + "'><input type='text' placeholder='What do you want to do?' /><button class='saveItem'>+</button></div>");
 });
 
 
@@ -31,9 +47,7 @@ $("body").on( "click", ".addItem", function(){
 $("body").on( "click", ".saveItem", function(){
 	var itemId = $(this).parent().attr('id');
 	var parentId = "#" + itemId ;	
-	alert(parentId);
 	var descText  = document.body.querySelector( parentId + " input[type='text']" ).value;
-	alert(descText);
 	$(parentId  + " input[type='text']").remove();
 	$(parentId  + " .saveItem").remove();
 	$(parentId).append("<div class='item-title'>"+ descText +"</div>");
