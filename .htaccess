@@ -1,0 +1,6 @@
+# display all other errors
+php_flag display_errors On
+
+
+# html markup of errors, make them easier to read
+php_flag html_errors On 
