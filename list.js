@@ -96,14 +96,14 @@ $("body").on( "click", ".item-title", function(){
 } );
 
 
-
-
 /* Add Item Description */
 $("body").on( "click", ".addDesc", function(){
 
-	var parentId = $(this).parent().attr('id');	
+	var parentId = $(this).parent().parent().attr('id');	
 
-	$(this).parent().parent().children(".item-description").append("<textarea>enter a description</textarea>");
+	alert(parentId);
+
+	$("#" + parentId ).append("<div class='item-description'><textarea>enter a description</textarea></div>");
 	
 	$("#" + parentId + " .saveDesc").show(300);
 	$("#" + parentId + " .addDesc").hide(300);
@@ -114,7 +114,9 @@ $("body").on( "click", ".addDesc", function(){
 /* Edit Item Description */
 $("body").on( "click", ".editDesc", function(){
 
-	var parentId = $(this).parent().parent().attr('id');	
+	var parentId = $(this).parent().parent().attr('id');
+
+	alert(parentId);
 
 	var descText  = document.body.querySelector( "#" + parentId + " .item-description" ).innerHTML;
 
@@ -140,9 +142,24 @@ $("body").on( "click", ".saveDesc", function(){
 
 	var newText = "<div class='item-description'>" + descText + "</div>";
 
-	$("#" + parentId + " .editDesc").show(300);
-	$("#" + parentId + " .saveDesc").hide(300);
-	$("#" + parentId ).append(newText);
+			
+	var strId = parentId.replace("item-", "");
+    var str =  "inc/actions.php?action=editDesc&desc=" + descText + "&id=" + strId; 
+    
+    alert(str);
+
+    	var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+
+				$("#" + parentId + " .editDesc").show(300);
+				$("#" + parentId + " .saveDesc").hide(300);
+				$("#" + parentId ).append(newText);
+
+			    }
+			};
+		xhr.open("GET", str, true);
+		xhr.send();  
 
 });
 
@@ -156,9 +173,25 @@ $("body").on( "click", ".deleteDesc", function(){
 
 	var newText = "<div class='item-description'></div>";
 
-	$("#" + parentId + " .addDesc").show(300);
-	$("#" + parentId + " .deleteDesc").hide(300);
-	$("#" + parentId ).append(newText);
+
+	var strId = parentId.replace("item-", "");
+    var str =  "inc/actions.php?action=deleteDesc&id=" + strId; 
+    
+    alert(str);
+
+    	var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+
+				$("#" + parentId + " .addDesc").show(300);
+				$("#" + parentId + " .deleteDesc").hide(300);
+				$("#" + parentId ).append(newText);
+
+			    }
+			};
+		xhr.open("GET", str, true);
+		xhr.send();  
+
 
 });
 

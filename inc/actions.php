@@ -11,12 +11,13 @@
 $action = $_GET["action"];
 
 
+
 if ($action == "add" ){
+
+    include("connect.php");
 
     $group = $_GET["group"];
     $name = $_GET["name"];
-
-    include("connect.php");
 
     try {
          $sql = "INSERT INTO items (id, group_id, name, description, done) 
@@ -33,21 +34,60 @@ if ($action == "add" ){
 
 if ($action == "done" ){
 
-    $id = $_GET["id"]; 
-
     include("connect.php");
+
+    $id = $_GET["id"]; 
 
     try {
         $sql = "UPDATE items SET done=1 WHERE id=$id";         
         // use exec() because no results are returned
         $conn->exec($sql);
         }
+
     catch(PDOException $e)
         {
         echo "Connection failed: " . $e->getMessage();
         }
 }
 
+if ($action == "editDesc" ){
+
+    include("connect.php");
+
+    $id = $_GET["id"]; 
+    $desc = $_GET["desc"]; 
+
+    try {
+      
+        $sql = "UPDATE items SET description='$desc' WHERE id=$id";         
+        // use exec() because no results are returned
+        $conn->exec($sql);
+        }
+        
+    catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+}
+
+if ($action == "deleteDesc" ){
+
+    include("connect.php");
+
+    $id = $_GET["id"]; 
+
+    try {
+      
+        $sql = "UPDATE items SET description=NULL WHERE id=$id";         
+        // use exec() because no results are returned
+        $conn->exec($sql);
+        }
+        
+    catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+}
 
 ?>
 
