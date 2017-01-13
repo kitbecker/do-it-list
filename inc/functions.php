@@ -4,7 +4,7 @@ function full_list_array(){
   include("connect.php");
   
   try{
-    $results = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id");
+    $results = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id WHERE done != 1");
       echo "Retrieved results.";
   }catch(Exception $e){
     echo "unable to retrieve results.";
@@ -14,13 +14,12 @@ function full_list_array(){
   $list = $results -> fetchAll();
       
 
-
       $groups = array();
       foreach( $list as $group ){
         if (!in_array($group["group_id"], $groups)) {
           $groups[] = $group["group_id"];
           $current_group = $group["group_id"];
-          echo '<div id="group-1" class="group dark">';
+          echo '<div id="group-' . $group["group_id"] . '" class="group dark">';
           echo "<h2>" .$group["group_name"] . "</h2>";
           echo "<p>item group description : " .$group["group_description"] . "</p>";
 
