@@ -9,8 +9,8 @@ function full_list_array(){
   }catch(Exception $e){
     echo "unable to retrieve results.";
     exit;
-  }
-
+  
+}
   $list = $results -> fetchAll();
 
       $groups = array();

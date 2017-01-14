@@ -18,17 +18,34 @@ if ($action == "add" ){
 
     $group = $_GET["group"];
     $name = $_GET["name"];
+    $type = $_GET["type"];
 
-    try {
-         $sql = "INSERT INTO items (id, group_id, name, description, done) 
-                VALUES (NULL, $group, '$name', NULL, '0');";         
-        // use exec() because no results are returned
-        $conn->exec($sql);
-        }
-    catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+    if ($type == "item"){
+        try {
+             $sql = "INSERT INTO items (id, group_id, name, description, done) 
+                    VALUES (NULL, $group, '$name', NULL, '0');";         
+            // use exec() because no results are returned
+            $conn->exec($sql);
+            }
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+    if ($type == "group"){
+        try {
+             $sql = "INSERT INTO groups ( group_name, group_description ) 
+                    VALUES (  '$name', $group );";         
+            // use exec() because no results are returned
+            $conn->exec($sql);
+            }
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+
+
 }
 
 

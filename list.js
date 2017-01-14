@@ -13,9 +13,23 @@ $("body").on( "click", ".saveGroup", function(){
 	var itemId = $(this).parent().attr('id');
 	var parentId = "#" + itemId ;	
 	var descText  = document.body.querySelector( parentId + " input[type='text']" ).value;
-	$(parentId  + " input[type='text']").remove();
-	$(parentId  + " .saveGroup").remove();
-	$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
+
+	var strId = itemId.replace("group-", "");
+    var str =  "inc/actions.php?action=add&type=group&name=" + descText; ;
+    alert(str);
+
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {   
+			$(parentId  + " input[type='text']").remove();
+			$(parentId  + " .saveGroup").remove();
+			$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
+		}  	
+	}
+
+	xhr.open("GET", str, true);
+	xhr.send();  
+
 } );
 
 
@@ -28,8 +42,8 @@ $("body").on( "click", ".saveGroup", function(){
 $("body").on( "click", ".itemDone", function(){
 	var itemId = $(this).parent().attr('id');
 	var parentId = "#" + itemId ;		
+	
 	var strId = itemId.replace("item-", "");
-
     var str =  "inc/actions.php?action=done&id=" + strId;
     alert(str);
 
@@ -67,7 +81,7 @@ $("body").on( "click", ".saveItem", function(){
 	groupId = groupId.replace("group-", "");
     groupId.replace('group-','');
 
-    var str =  "inc/actions.php?action=add&group=" + groupId + "&name=" + descText; 
+    var str =  "inc/actions.php?action=add&type=item&group=" + groupId + "&name=" + descText; 
     
     alert(str);
 
