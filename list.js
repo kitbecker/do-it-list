@@ -41,10 +41,21 @@ $("body").on( "click", ".saveGroup", function(){
 /* mark items as done once clicked */
 $("body").on( "click", ".itemDone", function(){
 	var itemId = $(this).parent().attr('id');
-	var parentId = "#" + itemId ;		
-	
-	var strId = itemId.replace("item-", "");
-    var str =  "inc/actions.php?action=done&id=" + strId;
+
+
+	if ( itemId.match(/item/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("item-", "");
+	    var str =  "inc/actions.php?action=done&type=item&id=" + strId;	
+	}
+
+
+	if ( itemId.match(/group/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("group-", "");
+	    var str =  "inc/actions.php?action=done&type=group&id=" + strId;
+	}
+		
     alert(str);
 
 	var xhr = new XMLHttpRequest();
@@ -152,14 +163,23 @@ $("body").on( "click", ".saveDesc", function(){
 
 	var descText  = document.body.querySelector( "#" + parentId + " .item-description textarea" ).value;
 
-	$(this).parent().parent().children(".item-description").remove();
 
+	if ( parentId.match(/item/g)){
+		$(this).parent().parent().children(".item-description").remove();
+		var strId = parentId.replace("item-", "");
+		 var str =  "inc/actions.php?action=editDesc&type=item&desc=" + descText + "&id=" + strId;
+	}
+
+
+	if ( parentId.match(/group/g)){
+		$(this).parent().parent().children(".group-description").remove();
+		var strId = parentId.replace("group-", "");
+ 		var str =  "inc/actions.php?action=editDesc&type=group&desc=" + descText + "&id=" + strId;
+	}
+
+   
 	var newText = "<div class='item-description'>" + descText + "</div>";
 
-			
-	var strId = parentId.replace("item-", "");
-    var str =  "inc/actions.php?action=editDesc&desc=" + descText + "&id=" + strId; 
-    
     alert(str);
 
     	var xhr = new XMLHttpRequest();
@@ -185,11 +205,20 @@ $("body").on( "click", ".deleteDesc", function(){
 
 	$(this).parent().parent().children(".item-description").remove();
 
+
+		if ( parentId.match(/item/g)){
+			var strId = parentId.replace("item-", "");
+		    var str =  "inc/actions.php?action=deleteDesc&type=item&id=" + strId; 
+		}
+
+
+		if ( parentId.match(/group/g)){
+			var strId = parentId.replace("group-", "");
+		    var str =  "inc/actions.php?action=deleteDesc&type=group&id=" + strId; 
+		}
+
+
 	var newText = "<div class='item-description'></div>";
-
-
-	var strId = parentId.replace("item-", "");
-    var str =  "inc/actions.php?action=deleteDesc&id=" + strId; 
     
     alert(str);
 
@@ -209,4 +238,31 @@ $("body").on( "click", ".deleteDesc", function(){
 
 });
 
+
+
+/* View done items */
+$("body").on( "click", ".viewDone", function(){
+
+	var parentId = $(this).parent().parent().attr('id');	
+
+	var strId = parentId.replace("group-", "");
+	var str =  "inc/actions.php?action=viewDone&type=group&id=" + strId; 
+    
+    alert(str);
+
+    function showStuff(data){
+    	$("#" + parentId ).append = data;
+    }
+
+	$.ajax({
+	    type: "GET",
+	    url: str,
+	    datatype: "html",
+	    data: dataString,
+	    success: function  showStuff(data) {
+	        doSomething(data);
+	    }
+	});
+
+});
 

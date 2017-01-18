@@ -10,8 +10,6 @@
 
 $action = $_GET["action"];
 
-
-
 if ($action == "add" ){
 
     include("connect.php");
@@ -35,7 +33,7 @@ if ($action == "add" ){
     if ($type == "group"){
         try {
              $sql = "INSERT INTO groups ( group_name, group_description ) 
-                    VALUES (  '$name', $group );";         
+                    VALUES (  '$name', NULL );";         
             // use exec() because no results are returned
             $conn->exec($sql);
             }
@@ -45,7 +43,6 @@ if ($action == "add" ){
             }
     }
 
-
 }
 
 
@@ -54,59 +51,158 @@ if ($action == "done" ){
     include("connect.php");
 
     $id = $_GET["id"]; 
+    $type = $_GET["type"];
 
-    try {
-        $sql = "UPDATE items SET done=1 WHERE id=$id";         
-        // use exec() because no results are returned
-        $conn->exec($sql);
+    if ($type == "item"){
+        try {
+            $sql = "UPDATE items SET done=1 WHERE id=$id";         
+
+            $conn->exec($sql);
+            }
+
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+
+    if ($type == "group"){
+            try {
+                $sql = "UPDATE groups SET inactive=1 WHERE group_id=$id";             
+
+                $conn->exec($sql);
+                }
+            catch(PDOException $e)
+                {
+                echo "Connection failed: " . $e->getMessage();
+                }
         }
 
-    catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
 }
+
+
+
+
+
+
 
 if ($action == "editDesc" ){
 
     include("connect.php");
 
     $id = $_GET["id"]; 
-    $desc = $_GET["desc"]; 
+    $desc = $_GET["desc"];
+    $type = $_GET["type"];
 
-    try {
-      
-        $sql = "UPDATE items SET description='$desc' WHERE id=$id";         
-        // use exec() because no results are returned
-        $conn->exec($sql);
-        }
-        
-    catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+
+    if ($type == "item"){
+        try {
+            $sql = "UPDATE items SET description='$desc' WHERE id=$id";         
+            
+            $conn->exec($sql);
+            }
+            
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+    if ($type == "group"){
+        try {
+            $sql = "UPDATE groups SET group_description='$desc' WHERE group_id=$id";         
+            
+            $conn->exec($sql);
+            }
+            
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
 }
+
+
+
 
 if ($action == "deleteDesc" ){
 
     include("connect.php");
 
-    $id = $_GET["id"]; 
+    $id = $_GET["id"];
+    $type = $_GET["type"];
 
-    try {
-      
-        $sql = "UPDATE items SET description=NULL WHERE id=$id";         
-        // use exec() because no results are returned
-        $conn->exec($sql);
+
+    if ($type == "item"){
+        try {
+          
+            $sql = "UPDATE items SET description=NULL WHERE id=$id";         
+            
+            $conn->exec($sql);
+            }
+            
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+
+    if ($type == "group"){
+        try {
+          
+            $sql = "UPDATE groups SET group_description=NULL WHERE group_id=$id";          
+            
+            $conn->exec($sql);
+            }
+            
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+
+}
+
+
+
+//view done items
+
+if ($action == "viewDone" ){
+
+    $id = $_GET["id"];
+    $type = $_GET["type"];
+
+    include("connect.php");
+  
+    try{
+    $doneItems = $conn -> query("SELECT * FROM items WHERE done != 1 AND group_id=$group");
+        echo "Retrieved results.";
+    }catch(Exception $e){
+        echo "unable to retrieve results.";
+    exit;
+  }
+
+   $list = $doneItems -> fetchAll();
+
+   foreach ($list as $item ) {
+      echo '<div class="item light" id="item-' . $item["id"] . '" >';
+      echo '  <div class="item-title">' . $item["name"] . '</div>';
+      echo '  <button type="button" class="itemDone"></button>';
+
+        if ($item["description"] != "" ){
+          echo '  <div class="item-description">';
+          echo $item["description"] ;
+          echo '  </div>';
         }
-        
-    catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+
+      echo '</div>';
+   }
+
 }
 
 ?>
+
+
+
 
 
 
