@@ -13,9 +13,23 @@ $("body").on( "click", ".saveGroup", function(){
 	var itemId = $(this).parent().attr('id');
 	var parentId = "#" + itemId ;	
 	var descText  = document.body.querySelector( parentId + " input[type='text']" ).value;
-	$(parentId  + " input[type='text']").remove();
-	$(parentId  + " .saveGroup").remove();
-	$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
+
+	var strId = itemId.replace("group-", "");
+    var str =  "inc/actions.php?action=add&type=group&name=" + descText; ;
+    alert(str);
+
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {   
+			$(parentId  + " input[type='text']").remove();
+			$(parentId  + " .saveGroup").remove();
+			$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
+		}  	
+	}
+
+	xhr.open("GET", str, true);
+	xhr.send();  
+
 } );
 
 
@@ -27,10 +41,21 @@ $("body").on( "click", ".saveGroup", function(){
 /* mark items as done once clicked */
 $("body").on( "click", ".itemDone", function(){
 	var itemId = $(this).parent().attr('id');
-	var parentId = "#" + itemId ;		
-	var strId = itemId.replace("item-", "");
 
-    var str =  "inc/actions.php?action=done&id=" + strId;
+
+	if ( itemId.match(/item/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("item-", "");
+	    var str =  "inc/actions.php?action=done&type=item&id=" + strId;	
+	}
+
+
+	if ( itemId.match(/group/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("group-", "");
+	    var str =  "inc/actions.php?action=done&type=group&id=" + strId;
+	}
+		
     alert(str);
 
 	var xhr = new XMLHttpRequest();
@@ -67,7 +92,7 @@ $("body").on( "click", ".saveItem", function(){
 	groupId = groupId.replace("group-", "");
     groupId.replace('group-','');
 
-    var str =  "inc/actions.php?action=add&group=" + groupId + "&name=" + descText; 
+    var str =  "inc/actions.php?action=add&type=item&group=" + groupId + "&name=" + descText; 
     
     alert(str);
 
@@ -96,14 +121,14 @@ $("body").on( "click", ".item-title", function(){
 } );
 
 
-
-
 /* Add Item Description */
 $("body").on( "click", ".addDesc", function(){
 
-	var parentId = $(this).parent().attr('id');	
+	var parentId = $(this).parent().parent().attr('id');	
 
-	$(this).parent().parent().children(".item-description").append("<textarea>enter a description</textarea>");
+	alert(parentId);
+
+	$("#" + parentId ).append("<div class='item-description'><textarea>enter a description</textarea></div>");
 	
 	$("#" + parentId + " .saveDesc").show(300);
 	$("#" + parentId + " .addDesc").hide(300);
@@ -114,7 +139,9 @@ $("body").on( "click", ".addDesc", function(){
 /* Edit Item Description */
 $("body").on( "click", ".editDesc", function(){
 
-	var parentId = $(this).parent().parent().attr('id');	
+	var parentId = $(this).parent().parent().attr('id');
+
+	alert(parentId);
 
 	var descText  = document.body.querySelector( "#" + parentId + " .item-description" ).innerHTML;
 
@@ -136,13 +163,37 @@ $("body").on( "click", ".saveDesc", function(){
 
 	var descText  = document.body.querySelector( "#" + parentId + " .item-description textarea" ).value;
 
-	$(this).parent().parent().children(".item-description").remove();
 
+	if ( parentId.match(/item/g)){
+		$(this).parent().parent().children(".item-description").remove();
+		var strId = parentId.replace("item-", "");
+		 var str =  "inc/actions.php?action=editDesc&type=item&desc=" + descText + "&id=" + strId;
+	}
+
+
+	if ( parentId.match(/group/g)){
+		$(this).parent().parent().children(".group-description").remove();
+		var strId = parentId.replace("group-", "");
+ 		var str =  "inc/actions.php?action=editDesc&type=group&desc=" + descText + "&id=" + strId;
+	}
+
+   
 	var newText = "<div class='item-description'>" + descText + "</div>";
 
-	$("#" + parentId + " .editDesc").show(300);
-	$("#" + parentId + " .saveDesc").hide(300);
-	$("#" + parentId ).append(newText);
+    alert(str);
+
+    	var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+
+				$("#" + parentId + " .editDesc").show(300);
+				$("#" + parentId + " .saveDesc").hide(300);
+				$("#" + parentId ).append(newText);
+
+			    }
+			};
+		xhr.open("GET", str, true);
+		xhr.send();  
 
 });
 
@@ -154,12 +205,64 @@ $("body").on( "click", ".deleteDesc", function(){
 
 	$(this).parent().parent().children(".item-description").remove();
 
-	var newText = "<div class='item-description'></div>";
 
-	$("#" + parentId + " .addDesc").show(300);
-	$("#" + parentId + " .deleteDesc").hide(300);
-	$("#" + parentId ).append(newText);
+		if ( parentId.match(/item/g)){
+			var strId = parentId.replace("item-", "");
+		    var str =  "inc/actions.php?action=deleteDesc&type=item&id=" + strId; 
+		}
+
+
+		if ( parentId.match(/group/g)){
+			var strId = parentId.replace("group-", "");
+		    var str =  "inc/actions.php?action=deleteDesc&type=group&id=" + strId; 
+		}
+
+
+	var newText = "<div class='item-description'></div>";
+    
+    alert(str);
+
+    	var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+
+				$("#" + parentId + " .addDesc").show(300);
+				$("#" + parentId + " .deleteDesc").hide(300);
+				$("#" + parentId ).append(newText);
+
+			    }
+			};
+		xhr.open("GET", str, true);
+		xhr.send();  
+
 
 });
 
+
+
+/* View done items */
+$("body").on( "click", ".viewDone", function(){
+
+	var parentId = $(this).parent().parent().attr('id');	
+
+	var strId = parentId.replace("group-", "");
+	var str =  "inc/actions.php?action=viewDone&type=group&id=" + strId; 
+    
+    alert(str);
+
+    function showStuff(data){
+    	$("#" + parentId ).append = data;
+    }
+
+	$.ajax({
+	    type: "GET",
+	    url: str,
+	    datatype: "html",
+	    data: dataString,
+	    success: function  showStuff(data) {
+	        doSomething(data);
+	    }
+	});
+
+});
 

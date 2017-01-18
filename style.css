@@ -15,8 +15,9 @@
   width: 29.3333%;
   float: left;
   display: inline-block;
-  padding: 20px 1%;
+  padding: 20px 1%  60px 1%;
   margin: 20px 2%;
+  position: relative;
 }
 
 /* line 8, scss/content.scss */
@@ -63,12 +64,17 @@
   left: 10px;
 }
 
-/* line 20, scss/content.scss */
+/* line 21, scss/content.scss */
+.group > .button-area {
+  bottom: 20px;
+}
+
+/* line 23, scss/content.scss */
 .item.edit .button-area {
   bottom: 10px;
 }
 
-/* line 22, scss/content.scss */
+/* line 25, scss/content.scss */
 button.itemDone {
   border: 1px solid black;
   width: 25px;
