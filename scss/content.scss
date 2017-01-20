@@ -23,4 +23,11 @@
 .item.edit .button-area { bottom: 10px; }
 
 button.itemDone { border: 1px solid black; width: 25px; height: 25px; float: right; display: inline-block; } 
+button.itemDelete { border: 1px solid white; background-color:transparent; width: 25px; height: 25px; float: right; display: inline-block; } 
 
+
+.doneItems { display: inline-block; width: 100%; overflow: hidden; }
+
+.doneItems.hide{ opacity: 0.0; height: 1px; transition: all .4s; }
+
+.doneItems.show{ opacity: 1.0; height:auto; transition: all .4s;}

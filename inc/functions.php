@@ -68,29 +68,31 @@ function full_list_array(){
           echo '<button class="addItem">+</button>';
           echo '</div>';
 
-
                   echo '  <div class="button-area">';
                   echo '    <button class="addDesc">add Description</button>';
                   echo '    <button class="saveDesc">save Description</button>';
                   echo '    <button class="editDesc">Edit Description</button>';
                   echo '    <button class="deleteDesc">X</button>';
                   echo '    <button class="viewDone">View Finished Items</button>';
+                  echo '    <button class="hideDone">hide Finished Items</button>';
                   echo '  </div>';
 
-        echo '<h3>Done Items</h3>';         
+/* Done Items */
+        echo '<div class="doneItems hide"><h3>Done Items</h3>';  
         foreach( $done as $item ){
+
                 if( $item["group_id"] == $current_group ){
 
                   echo '<div class="item done" id="item-' . $item["id"] . '" >';
                   echo '  <div class="item-title">' . $item["name"] . '</div>';
-                  echo '  <button type="button" class="itemDone"></button>';
+                  echo '  <button type="button" class="itemDelete"></button>';
 
                     if ($item["description"] != "" ){
                       echo '  <div class="item-description">';
                       echo $item["description"] ;
                       echo '  </div>';
                     }
-
+                
                   echo '  <div class="button-area">';
                   echo '    <button class="addDesc">add Description</button>';
                   echo '    <button class="saveDesc">save Description</button>';
@@ -100,18 +102,7 @@ function full_list_array(){
                   echo '</div>';
                 }
             }
-
-
-
-          echo '</div>';
+          echo '</div><!-- end done items --></div>';
         }
-      
-
-
-
-
-
-
-
 }
 

@@ -82,3 +82,34 @@ button.itemDone {
   float: right;
   display: inline-block;
 }
+
+/* line 26, scss/content.scss */
+button.itemDelete {
+  border: 1px solid white;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  float: right;
+  display: inline-block;
+}
+
+/* line 29, scss/content.scss */
+.doneItems {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 31, scss/content.scss */
+.doneItems.hide {
+  opacity: 0.0;
+  height: 1px;
+  transition: all .4s;
+}
+
+/* line 33, scss/content.scss */
+.doneItems.show {
+  opacity: 1.0;
+  height: auto;
+  transition: all .4s;
+}

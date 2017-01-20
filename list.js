@@ -99,17 +99,14 @@ $("body").on( "click", ".saveItem", function(){
     	var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				   
 				    $(parentId  + " input[type='text']").remove();
 					$(parentId  + " .saveItem").remove();
 					$(parentId).append("<div class='item-title'>"+ descText +"</div>");
     				$(parentId).append("<button type='button' class='itemDone' onclick='itemDone(" + itemId + ")'></button><div class='item-description'></div><div class='button-area'><button class='addDesc'>add Description</button><button class='saveDesc'>save Description</button><button class='editDesc'>Edit Description</button><button class='deleteDesc'>X</button></div>");
-			    	
 			    }
 			};
 		xhr.open("GET", str, true);
 		xhr.send();  
-
 } );
 
 
@@ -234,35 +231,56 @@ $("body").on( "click", ".deleteDesc", function(){
 			};
 		xhr.open("GET", str, true);
 		xhr.send();  
-
-
 });
 
 
 
 /* View done items */
-$("body").on( "click", ".viewDone", function(){
+$("body").on( "click", ".viewDone, .hideDone, .doneItems h3", function(){
 
 	var parentId = $(this).parent().parent().attr('id');	
+	var target = "#" + parentId + " div.doneItems";
 
-	var strId = parentId.replace("group-", "");
-	var str =  "inc/actions.php?action=viewDone&type=group&id=" + strId; 
-    
-    alert(str);
+	var showState = $( target ).hasClass( "hide" );
 
-    function showStuff(data){
-    	$("#" + parentId ).append = data;
-    }
-
-	$.ajax({
-	    type: "GET",
-	    url: str,
-	    datatype: "html",
-	    data: dataString,
-	    success: function  showStuff(data) {
-	        doSomething(data);
-	    }
-	});
+	if( showState ){
+		$(target).removeClass("hide").addClass("show");
+	}else{
+		$(target).addClass("hide").removeClass("show");
+	}
 
 });
 
+/* Delete done item*/
+
+$("body").on( "click", ".itemDelete", function(){
+	var itemId = $(this).parent().attr('id');
+
+	if ( itemId.match(/item/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("item-", "");
+	    var str =  "inc/actions.php?action=delete&type=item&id=" + strId;	
+	}
+
+	if ( itemId.match(/group/g)){
+		var parentId = "#" + itemId ;
+		var strId = itemId.replace("group-", "");
+	    var str =  "inc/actions.php?action=delete&type=group&id=" + strId;
+	}
+		
+    alert(str);
+
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {   
+			$(parentId).animate({ width: "70%" }, 100 ).animate({ opacity: 0.0 }, 100 ).animate({ height: 0, padding: 0 }, 200 );
+			$(parentId).queue(function() {
+			$( parentId ).remove();
+			$( parentId ).dequeue();
+		});
+			    	
+		    }
+		};
+	xhr.open("GET", str, true);
+	xhr.send();  
+}); 
