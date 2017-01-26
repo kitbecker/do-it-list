@@ -38,9 +38,25 @@ function full_list_array(){
           echo "<div id='group-" .$group["group_id"] . "' class='group dark'>";
           echo '  <button type="button" class="itemDone"></button>';
           echo "<h2>" .$group["group_name"] . "</h2>";
-          echo "<div class='item-description'>item group description : " .$group["group_description"] . "</div>";
+          echo "<div class='item-description'>" .$group["group_description"] . "</div>";
 
+          /* group buttons */          
+            echo '  <div class="button-area hide">';
+            if (!$group["group_description"]){
+              echo '    <button class="addDesc">add Description</button>';
+              echo '    <button class="saveDesc hide">save Description</button>';
+              echo '    <button class="editDesc hide">Edit Description</button>';
+              echo '    <button class="deleteDesc hide">X</button>';
+            }else{
+              echo '    <button class="addDesc hide">add Description</button>';
+              echo '    <button class="saveDesc hide">save Description</button>';
+              echo '    <button class="editDesc show">Edit Description</button>';
+              echo '    <button class="deleteDesc show">X</button>';
+            }
 
+            echo '  </div>';
+
+          echo '  <div class="items">';
 
           foreach( $list as $item ){
                 if( $item["group_id"] == $current_group ){
@@ -50,32 +66,38 @@ function full_list_array(){
                   echo '  <button type="button" class="itemDone"></button>';
 
                     if ($item["description"] != "" ){
-                      echo '  <div class="item-description">';
+                      echo '  <div class="item-description hide">';
                       echo $item["description"] ;
                       echo '  </div>';
                     }
 
-                  echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
-                  echo '  </div>';
+                    echo '  <div class="button-area hide">';
+                    if ( !$item["description"] ){
+                      echo '    <button class="addDesc">add Description</button>';
+                      echo '    <button class="saveDesc hide">save Description</button>';
+                      echo '    <button class="editDesc hide">Edit Description</button>';
+                      echo '    <button class="deleteDesc hide">X</button>';
+                    }else{
+                      echo '    <button class="addDesc hide">add Description</button>';
+                      echo '    <button class="saveDesc hide">save Description</button>';
+                      echo '    <button class="editDesc show">Edit Description</button>';
+                      echo '    <button class="deleteDesc show">X</button>';
+                    }
+
+                    echo '  </div>';
                   echo '</div>';
                 }
             }
-          echo '<div id="item-buttons">';
-          echo '<button class="addItem">+</button>';
+
           echo '</div>';
 
-                  echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
-                  echo '    <button class="viewDone">View Finished Items</button>';
-                  echo '    <button class="hideDone">hide Finished Items</button>';
-                  echo '  </div>';
+          echo '<div id="item-buttons">';
+          echo '<button class="addItem">+</button>';
+          echo '    <button class="viewDone">View Finished Items</button>';
+          echo '    <button class="hideDone hide">hide Finished Items</button>';
+          echo '</div>';
+
+
 
 /* Done Items */
         echo '<div class="doneItems hide"><h3>Done Items</h3>';  
@@ -93,12 +115,6 @@ function full_list_array(){
                       echo '  </div>';
                     }
                 
-                  echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
-                  echo '  </div>';
                   echo '</div>';
                 }
             }
