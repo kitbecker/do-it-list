@@ -38,10 +38,10 @@ function full_list_array(){
           echo "<div id='group-" .$group["group_id"] . "' class='group dark'>";
           echo '  <button type="button" class="itemDone"></button>';
           echo "<h2>" .$group["group_name"] . "</h2>";
-          echo "<div class='item-description'>item group description : " .$group["group_description"] . "</div>";
+          echo "<div class='item-description'>" .$group["group_description"] . "</div>";
 
 
-
+        echo '  <div class="items">';
           foreach( $list as $item ){
                 if( $item["group_id"] == $current_group ){
 
@@ -50,68 +50,75 @@ function full_list_array(){
                   echo '  <button type="button" class="itemDone"></button>';
 
                     if ($item["description"] != "" ){
-                      echo '  <div class="item-description">';
+                      echo '  <div class="item-description hide">';
                       echo $item["description"] ;
                       echo '  </div>';
                     }
 
-                  echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
-                  echo '  </div>';
-                  echo '</div>';
+                  echo '  <div class="button-area hide">';
+
+                    echo '    <button class="saveDesc hide">save Description</button>';
+                      if ($item["description"] != "" ){
+                        echo '    <button class="editDesc show">Edit Description</button>';
+                        echo '    <button class="deleteDesc show">X</button>';
+                        echo '    <button class="addDesc hide">add Description</button>';
+                      }else{
+                        echo '    <button class="addDesc show">add Description</button>';
+                        echo '    <button class="editDesc hide">Edit Description</button>';
+                        echo '    <button class="deleteDesc hide">X</button>';
+                      }
+                    echo '  </div>';
+                  echo '</div>'; // end item
                 }
             }
+        echo '</div>'; // end items
+
+
+
           echo '<div id="item-buttons">';
           echo '<button class="addItem">+</button>';
           echo '</div>';
-
-
                   echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
+
+                  echo '    <button class="saveDesc hide">save Description</button>';
+                      if ($group["group_description"] != "" ){
+                        echo '    <button class="editDesc show">Edit Description</button>';
+                        echo '    <button class="deleteDesc show">X</button>';
+                        echo '    <button class="addDesc hide">add Description</button>';
+                      }else{
+                        echo '    <button class="addDesc show">add Description</button>';
+                        echo '    <button class="editDesc hide">Edit Description</button>';
+                        echo '    <button class="deleteDesc hide">X</button>';
+                      }
+
                   echo '    <button class="viewDone">View Finished Items</button>';
+                  echo '    <button class="hideDone hide">hide Finished Items</button>';
+
                   echo '  </div>';
 
-        echo '<h3>Done Items</h3>';         
+        echo '  <div class="doneItems hide">';
+          echo '<h3>Done Items</h3>';         
         foreach( $done as $item ){
                 if( $item["group_id"] == $current_group ){
 
                   echo '<div class="item done" id="item-' . $item["id"] . '" >';
                   echo '  <div class="item-title">' . $item["name"] . '</div>';
-                  echo '  <button type="button" class="itemDone"></button>';
+                  echo '  <button type="button" class="itemDelete"></button>';
 
                     if ($item["description"] != "" ){
                       echo '  <div class="item-description">';
                       echo $item["description"] ;
                       echo '  </div>';
                     }
-
-                  echo '  <div class="button-area">';
-                  echo '    <button class="addDesc">add Description</button>';
-                  echo '    <button class="saveDesc">save Description</button>';
-                  echo '    <button class="editDesc">Edit Description</button>';
-                  echo '    <button class="deleteDesc">X</button>';
-                  echo '  </div>';
                   echo '</div>';
                 }
             }
+        echo '</div>'; // end done items
 
 
-
-          echo '</div>';
+          echo '</div>'; // end group 
         }
       
-
-
-
-
-
-
 
 }
 

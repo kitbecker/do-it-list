@@ -11,6 +11,20 @@
 }
 
 /* line 6, scss/content.scss */
+.hide {
+  opacity: 0.0;
+  height: 0px;
+  transition: .4s all;
+}
+
+/* line 7, scss/content.scss */
+.show {
+  opacity: 1.0;
+  height: auto;
+  transition: .4s all;
+}
+
+/* line 11, scss/content.scss */
 .group {
   width: 29.3333%;
   float: left;
@@ -20,7 +34,7 @@
   position: relative;
 }
 
-/* line 8, scss/content.scss */
+/* line 13, scss/content.scss */
 .item {
   width: 100%;
   height: 45px;
@@ -31,51 +45,37 @@
   position: relative;
 }
 
-/* line 10, scss/content.scss */
+/* line 15, scss/content.scss */
 .item.edit {
-  height: 400px;
+  height: auto;
 }
 
-/* line 12, scss/content.scss */
+/* line 17, scss/content.scss */
 .item-description {
-  background-color: #c2cfeb;
   width: 100%;
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
 }
 
-/* line 14, scss/content.scss */
+/* line 19, scss/content.scss */
 .item-description textarea {
   width: 100%;
   height: 150px;
 }
 
-/* line 16, scss/content.scss */
+/* line 21, scss/content.scss */
 .item-title {
   width: calc(100% - 40px);
   float: left;
 }
 
-/* line 19, scss/content.scss */
+/* line 24, scss/content.scss */
 .button-area {
   width: 100%;
   display: inline-block;
-  position: absolute;
-  bottom: -40px;
-  left: 10px;
 }
 
-/* line 21, scss/content.scss */
-.group > .button-area {
-  bottom: 20px;
-}
-
-/* line 23, scss/content.scss */
-.item.edit .button-area {
-  bottom: 10px;
-}
-
-/* line 25, scss/content.scss */
-button.itemDone {
+/* line 30, scss/content.scss */
+button.itemDone, button.itemDelete {
   border: 1px solid black;
   width: 25px;
   height: 25px;

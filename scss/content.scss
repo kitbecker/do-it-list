@@ -3,24 +3,29 @@
 .light { background-color: #e2e2e2; color: #000000; }
 
 
+.hide { opacity: 0.0; height: 0px; transition: .4s all; }
+.show { opacity: 1.0; height: auto; transition: .4s all;}
+
+
+
 .group{ width: 29.3333%; float: left; display: inline-block; padding: 20px 1%  60px 1%; margin: 20px 2%; position:relative;  }
 
 .item{ width: 100%; height: 45px; display: inline-block; padding: 10px 10px; margin: 1px 0; overflow:hidden; position: relative;}
 
-.item.edit { height: 400px; }
+.item.edit { height: auto; }
 
-.item-description {background-color: #c2cfeb; width: 100%; margin: 40px 0 0 0; }
+.item-description { width: 100%; margin: 20px 0 0 0; }
 
 .item-description textarea { width: 100%; height: 150px;}
 
 .item-title { width: calc(100% - 40px); float: left;  }
 
 
-.button-area { width: 100%; display: inline-block; position: absolute; bottom: -40px; left: 10px; }
+.button-area { width: 100%; display: inline-block; }
 
-.group > .button-area { bottom: 20px; } 
+.group > .button-area { } 
 
-.item.edit .button-area { bottom: 10px; }
+.item.edit .button-area { }
 
-button.itemDone { border: 1px solid black; width: 25px; height: 25px; float: right; display: inline-block; } 
+button.itemDone, button.itemDelete { border: 1px solid black; width: 25px; height: 25px; float: right; display: inline-block; } 
 
