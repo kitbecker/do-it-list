@@ -5,22 +5,44 @@
 
 .group{ width: 29.3333%; float: left; display: inline-block; padding: 20px 1%  60px 1%; margin: 20px 2%; position:relative;  }
 
-.item{ width: 100%; height: 45px; display: inline-block; padding: 10px 10px; margin: 1px 0; overflow:hidden; position: relative;}
+.item{ width: 100%; height: auto; display: inline-block; padding: 10px 10px; margin: 1px 0; overflow:hidden; position: relative;}
 
-.item.edit { height: 400px; }
+.item.edit { height: auto; }
 
-.item-description {background-color: #c2cfeb; width: 100%; margin: 40px 0 0 0; }
+.item-description {  width: 100%; margin: 0; transition: all .4s;  }
+
+
+.hide{ opacity: 0.0; height: 1px; }
+.show{ opacity: 1.0; height:auto; }
+
+.item-description.hide{ opacity: 0.0; height: 1px; }
+.item-description.show{ opacity: 1.0; height:auto; }
+
+
 
 .item-description textarea { width: 100%; height: 150px;}
 
-.item-title { width: calc(100% - 40px); float: left;  }
+.item-title { width: calc(100% - 40px); float: left; }
 
 
-.button-area { width: 100%; display: inline-block; position: absolute; bottom: -40px; left: 10px; }
+.button-area { width: 100%; display: inline-block;  }
+
+.button-area.hide{ opacity: 0.0; height: 1px; transition: all .4s; display: none; }
+.button-area.off{ opacity: 1.0; height:auto; transition: all .4s; display: inline-block;}
+
+
+
 
 .group > .button-area { bottom: 20px; } 
 
 .item.edit .button-area { bottom: 10px; }
 
 button.itemDone { border: 1px solid black; width: 25px; height: 25px; float: right; display: inline-block; } 
+button.itemDelete { border: 1px solid white; background-color:transparent; width: 25px; height: 25px; float: right; display: inline-block; } 
 
+
+.doneItems { display: inline-block; width: 100%; overflow: hidden; }
+
+.doneItems.hide{ opacity: 0.0; height: 1px; transition: all .4s; }
+
+.doneItems.show{ opacity: 1.0; height:auto; transition: all .4s;}

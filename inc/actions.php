@@ -80,8 +80,39 @@ if ($action == "done" ){
 
 }
 
+if ($action == "delete" ){
 
+    include("connect.php");
 
+    $id = $_GET["id"]; 
+    $type = $_GET["type"];
+
+    if ($type == "item"){
+        try {
+            $sql = "DELETE FROM items WHERE id=$id";         
+
+            $conn->exec($sql);
+            }
+
+        catch(PDOException $e)
+            {
+            echo "Connection failed: " . $e->getMessage();
+            }
+    }
+
+    if ($type == "group"){
+            try {
+                $sql = "DELETE FROM groups WHERE group_id=$id";             
+
+                $conn->exec($sql);
+                }
+            catch(PDOException $e)
+                {
+                echo "Connection failed: " . $e->getMessage();
+                }
+        }
+
+}
 
 
 
@@ -200,10 +231,6 @@ if ($action == "viewDone" ){
 }
 
 ?>
-
-
-
-
 
 
 </body>
