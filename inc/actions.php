@@ -8,15 +8,15 @@
 
 <?php
 
-$action = $_GET["action"];
+$action = $_POST["action"];
 
 if ($action == "add" ){
 
     include("connect.php");
 
-    $group = $_GET["group"];
-    $name = $_GET["name"];
-    $type = $_GET["type"];
+    $group = $_POST["group"];
+    $name = $_POST["name"];
+    $type = $_POST["type"];
 
     if ($type == "item"){
         try {
@@ -50,8 +50,8 @@ if ($action == "done" ){
 
     include("connect.php");
 
-    $id = $_GET["id"]; 
-    $type = $_GET["type"];
+    $id = $_POST["id"]; 
+    $type = $_POST["type"];
 
     if ($type == "item"){
         try {
@@ -84,8 +84,8 @@ if ($action == "delete" ){
 
     include("connect.php");
 
-    $id = $_GET["id"]; 
-    $type = $_GET["type"];
+    $id = $_POST["id"]; 
+    $type = $_POST["type"];
 
     if ($type == "item"){
         try {
@@ -121,9 +121,9 @@ if ($action == "editDesc" ){
 
     include("connect.php");
 
-    $id = $_GET["id"]; 
-    $desc = $_GET["desc"];
-    $type = $_GET["type"];
+    $id = $_POST["id"]; 
+    $desc = $_POST["desc"];
+    $type = $_POST["type"];
 
 
     if ($type == "item"){
@@ -159,8 +159,8 @@ if ($action == "deleteDesc" ){
 
     include("connect.php");
 
-    $id = $_GET["id"];
-    $type = $_GET["type"];
+    $id = $_POST["id"];
+    $type = $_POST["type"];
 
 
     if ($type == "item"){
@@ -199,8 +199,8 @@ if ($action == "deleteDesc" ){
 
 if ($action == "viewDone" ){
 
-    $id = $_GET["id"];
-    $type = $_GET["type"];
+    $id = $_POST["id"];
+    $type = $_POST["type"];
 
     include("connect.php");
   

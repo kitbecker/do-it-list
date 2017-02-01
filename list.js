@@ -49,31 +49,27 @@ $("body").on( "click", ".itemDone", function(){
 	if ( itemId.match(/item/g)){
 		var parentId = "#" + itemId ;
 		var strId = itemId.replace("item-", "");
-	    var str =  "inc/actions.php?action=done&type=item&id=" + strId;	
+		var type = 'item';
 	}
 
 
 	if ( itemId.match(/group/g)){
 		var parentId = "#" + itemId ;
 		var strId = itemId.replace("group-", "");
-	    var str =  "inc/actions.php?action=done&type=group&id=" + strId;
+		var type = 'group';
 	}
-		
-    alert(str);
 
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {   
-			$(parentId).animate({ width: "70%" }, 100 ).animate({ opacity: 0.0 }, 100 ).animate({ height: 0, padding: 0 }, 200 );
+    $.post( "inc/actions.php",{   
+	action : 'done',
+	id : strId,
+	type : type  
+	 } , 
+	 function(response){ 
+ 			$(parentId).animate({ width: "70%" }, 100 ).animate({ opacity: 0.0 }, 100 ).animate({ height: 0, padding: 0 }, 200 );
 			$(parentId).queue(function() {
 			$( parentId ).remove();
-			$( parentId ).dequeue();
-		});
-			    	
-		    }
-		};
-	xhr.open("GET", str, true);
-	xhr.send();  
+			$( parentId ).dequeue(); });
+	} ); 
 }); 
 
 
@@ -100,7 +96,7 @@ $("body").on( "click", ".saveItem", function(){
     groupId.replace('group-','');
 
 
-    $.get( "inc/actions.php",{   
+    $.post( "inc/actions.php",{   
 	action : 'add',
 	group : groupId,
 	type : 'item',  
@@ -131,7 +127,7 @@ $("body").on( "keyup", ".item > input[type='text']", function(e){
 	groupId = groupId.replace("group-", "");
     groupId.replace('group-','');
 
-	    $.get( "inc/actions.php",{   
+	    $.post( "inc/actions.php",{   
 		action : 'add',
 		group : groupId,
 		type : 'item',  
@@ -237,7 +233,7 @@ $("body").on( "click", ".saveDesc", function(){
 
 	var newText = "<div class='item-description'>" + descText + "</div>";
 
-    $.get( "inc/actions.php",{   
+    $.post( "inc/actions.php",{   
 	action : 'editDesc',
 	type : type,  
 	id : strId,  
@@ -281,7 +277,7 @@ $("body").on( "keyup", "textarea", function(e){
 	var newText = "<div class='item-description'>" + descText + "</div>";
 
 
-        $.get( "inc/actions.php",{   
+        $.post( "inc/actions.php",{   
 		action : 'editDesc',
 		type : type,  
 		id : strId,  
@@ -321,7 +317,7 @@ $("body").on( "click", ".deleteDesc", function(){
 
 		var newText = "<div class='item-description'></div>";
 
-        $.get( "inc/actions.php",{   
+        $.post( "inc/actions.php",{   
 		action : 'deleteDesc',
 		type : type,  
 		id : strId
@@ -395,7 +391,7 @@ $("body").on( "click", ".itemDelete", function(){
 		var type = 'group';
 	}
 		
-        $.get( "inc/actions.php",{   
+        $.post( "inc/actions.php",{   
 		action : 'delete',
 		type : type,  
 		id : strId
