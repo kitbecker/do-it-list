@@ -16,21 +16,18 @@ $("body").on( "click", ".saveGroup", function(){
 
 	var strId = itemId.replace("group-", "");
     var str =  "inc/actions.php?action=add&type=group&name=" + descText; ;
-    alert(str);
 
 
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {   
-			$(parentId  + " input[type='text']").remove();
+    $.post( "inc/actions.php",{   
+	action : 'add',
+	type : 'group',  
+	name : descText
+	 } , 
+	 function(response){ 
+ 			$(parentId  + " input[type='text']").remove();
 			$(parentId  + " .saveGroup").remove();
 			$(parentId).append("<h2>"+ descText +"</h2><div id='item-buttons'><button class='addItem'>+</button></div>");
-		}  	
-	}
-
-	xhr.open("GET", str, true);
-	xhr.send();  
-
+	} ); 
 } );
 
 
