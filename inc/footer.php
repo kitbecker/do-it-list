@@ -2,7 +2,7 @@
 	</body>
 
 
-	<script src="list.js" ></script>
+	<script src="inc/list.js" ></script>
 
 </html>
 <?php ?>

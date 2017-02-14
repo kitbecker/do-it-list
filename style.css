@@ -1,30 +1,30 @@
-/* line 2, scss/content.scss */
+/* line 2, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .dark {
   background-color: #2d2d2d;
   color: #ffffff;
 }
 
-/* line 3, scss/content.scss */
+/* line 3, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .light {
   background-color: #e2e2e2;
   color: #000000;
 }
 
-/* line 6, scss/content.scss */
+/* line 6, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .hide {
   opacity: 0.0;
   height: 0px;
   transition: .4s all;
 }
 
-/* line 7, scss/content.scss */
+/* line 7, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .show {
   opacity: 1.0;
   height: auto;
   transition: .4s all;
 }
 
-/* line 11, scss/content.scss */
+/* line 11, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .group {
   width: 29.3333%;
   float: left;
@@ -34,7 +34,7 @@
   position: relative;
 }
 
-/* line 13, scss/content.scss */
+/* line 13, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item {
   width: 100%;
   height: 45px;
@@ -45,36 +45,36 @@
   position: relative;
 }
 
-/* line 15, scss/content.scss */
+/* line 15, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item.edit {
   height: auto;
 }
 
-/* line 17, scss/content.scss */
+/* line 17, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item-description {
   width: 100%;
   margin: 20px 0 0 0;
 }
 
-/* line 19, scss/content.scss */
+/* line 19, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item-description textarea {
   width: 100%;
   height: 150px;
 }
 
-/* line 21, scss/content.scss */
+/* line 21, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .item-title {
   width: calc(100% - 40px);
   float: left;
 }
 
-/* line 24, scss/content.scss */
+/* line 24, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 .button-area {
   width: 100%;
   display: inline-block;
 }
 
-/* line 30, scss/content.scss */
+/* line 30, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/content.scss */
 button.itemDone, button.itemDelete {
   border: 1px solid black;
   width: 25px;
@@ -83,14 +83,14 @@ button.itemDone, button.itemDelete {
   display: inline-block;
 }
 
-/* line 1, scss/general.scss */
+/* line 1, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/general.scss */
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 7, scss/general.scss */
+/* line 7, C:/Users/Kit/Google Drive/0 - Active-Projects/do-it-list/scss/general.scss */
 *:before,
 *:after {
   -webkit-box-sizing: border-box;

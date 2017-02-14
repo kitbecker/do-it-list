@@ -4,7 +4,7 @@ function full_list_array(){
   include("connect.php");
   
   try{
-    $groups = $conn -> query("SELECT * FROM groups WHERE inactive != 1");
+    $groups = $conn -> query("SELECT * FROM groups WHERE inactive != 1 ORDER BY groups.ord ");
       echo "Retrieved results.";
   }catch(Exception $e){
     echo "unable to retrieve results.";
@@ -12,7 +12,7 @@ function full_list_array(){
   }
 
   try{
-    $items = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id WHERE items.done != 1");
+    $items = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id WHERE items.done != 1 ORDER BY items.ord");
       echo "Retrieved results.";
   }catch(Exception $e){
     echo "unable to retrieve results.";
@@ -20,7 +20,7 @@ function full_list_array(){
   }  
 
   try{
-    $doneItems = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id WHERE items.done = 1");
+    $doneItems = $conn -> query("SELECT * FROM items JOIN groups ON items.group_id = groups.group_id WHERE items.done = 1  ORDER BY items.ord");
       echo "Retrieved results.";
   }catch(Exception $e){
     echo "unable to retrieve results.";
